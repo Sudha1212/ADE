@@ -46,7 +46,10 @@
 				"inputs": [
 					{
 						"referenceName": "AzureSQLDB_Anytable",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"Table_Name": "Customer"
+						}
 					}
 				],
 				"outputs": [
