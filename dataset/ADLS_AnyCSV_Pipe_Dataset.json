@@ -1,0 +1,24 @@
+{
+	"name": "ADLS_AnyCSV_Pipe_Dataset",
+	"properties": {
+		"description": "ADLS_AnyCSV_Pipe_Dataset",
+		"linkedServiceName": {
+			"referenceName": "ADLS_inked_Serive",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CSV_Pipe",
+				"fileSystem": "landing"
+			},
+			"columnDelimiter": "|",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

@@ -1,0 +1,55 @@
+{
+	"name": "Copy_Customer_JSON_To_Folder",
+	"properties": {
+		"description": "Copy_Customer_JSON_To_Folder",
+		"activities": [
+			{
+				"name": "Copy_Customer_JSON_To_Folder",
+				"description": "Copy_Customer_JSON_To_Folder",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "AzureSQLDB_Anytable",
+						"type": "DatasetReference",
+						"parameters": {
+							"Table_Name": "Customer"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ADLS_AnyJSON_Dataset",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
