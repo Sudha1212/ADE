@@ -1,0 +1,9 @@
+{
+	"name": "Mission100Sudhakar12DecADF",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "ebb3182e-6a58-4df0-a53f-d52d6f64f084",
+		"tenantId": "a5380635-4289-4d36-8cde-dbf1d8506765"
+	}
+}
