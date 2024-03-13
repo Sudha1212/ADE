@@ -2,12 +2,12 @@
 	"name": "Misson100_AzureSqlDB",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
-		"description": "Misson100_AzureSqlDB",
+		"description": "Misson100_AzureSqlDB_LS",
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=mission100sudhakar12dec-dbserver.database.windows.net;initial catalog=Mission100Sudhakar12DecSQLdb;user id=SidSQLDB",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDc1QjAyQTdDLUQwMTMtNDMwNC1BNTNELURCQ0Y1N0I2REQ3MF8wNTE0YjRmZS1mM2ZhLTQ5NzItYmRhYS1jNDFiNmM1MDcwMWMiDQp9"
+			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=mission100sudhakar12dec-dbserver.database.windows.net;initial catalog=Mission100Sudhakar12DecSQLdb;user id=SQLServer",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDc1QjAyQTdDLUQwMTMtNDMwNC1BNTNELURCQ0Y1N0I2REQ3MF8yNzY5ZDYzYS02YWZjLTRlNzgtODg3NC04ODgwMDI1MWQwMzQiDQp9"
 		}
 	}
 }
