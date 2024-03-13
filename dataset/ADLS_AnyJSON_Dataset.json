@@ -1,6 +1,7 @@
 {
-	"name": "ADLS_AnyTable_Dataset",
+	"name": "ADLS_AnyJSON_Dataset",
 	"properties": {
+		"description": "ADLS_AnyJSON_Dataset",
 		"linkedServiceName": {
 			"referenceName": "ADLS_inked_Serive",
 			"type": "LinkedServiceReference"
