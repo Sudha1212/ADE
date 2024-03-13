@@ -1,0 +1,11 @@
+{
+	"name": "AzureKeyVault_LS",
+	"properties": {
+		"description": "AzureKeyVault_LS",
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://Mission100ADFKeyVault.vault.azure.net/"
+		}
+	}
+}
