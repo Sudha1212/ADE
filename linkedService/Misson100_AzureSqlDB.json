@@ -1,13 +1,20 @@
 {
 	"name": "Misson100_AzureSqlDB",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"description": "Misson100_AzureSqlDB_LS",
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=mission100sudhakar12dec-dbserver.database.windows.net;initial catalog=Mission100Sudhakar12DecSQLdb;user id=SQLServer",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDc1QjAyQTdDLUQwMTMtNDMwNC1BNTNELURCQ0Y1N0I2REQ3MF8yNzY5ZDYzYS02YWZjLTRlNzgtODg3NC04ODgwMDI1MWQwMzQiDQp9"
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=mission100sudhakar12dec-dbserver.database.windows.net;Initial Catalog=Mission100Sudhakar12DecSQLdb;User ID=SQLServer",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault_LS",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "SQLDB-Password"
+			}
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }
