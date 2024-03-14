@@ -1,0 +1,32 @@
+{
+	"name": "ADLS_AnyFolder_CSV",
+	"properties": {
+		"description": "ADLS_AnyFolder_CSV",
+		"linkedServiceName": {
+			"referenceName": "ADLS_inked_Serive",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Folder_Name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@dataset().Folder_Name",
+					"type": "Expression"
+				},
+				"fileSystem": "landing"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
