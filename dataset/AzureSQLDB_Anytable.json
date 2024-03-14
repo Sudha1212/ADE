@@ -3,7 +3,7 @@
 	"properties": {
 		"description": "AzureSQLDB_Anytable",
 		"linkedServiceName": {
-			"referenceName": "Misson100_AzureSqlDB",
+			"referenceName": "AzureSqlDB_LS",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
