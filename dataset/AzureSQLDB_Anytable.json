@@ -9,6 +9,9 @@
 		"parameters": {
 			"Table_Name": {
 				"type": "string"
+			},
+			"Schema_Name": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
@@ -79,7 +82,10 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "SalesLt",
+			"schema": {
+				"value": "@dataset().Schema_Name",
+				"type": "Expression"
+			},
 			"table": {
 				"value": "@dataset().Table_Name",
 				"type": "Expression"
