@@ -1,0 +1,7 @@
+{
+	"name": "Ingestion_Customer_JOIN_ADLS",
+	"properties": {
+		"description": "Ingestion_Customer_JOIN_ADLS",
+		"annotations": []
+	}
+}
