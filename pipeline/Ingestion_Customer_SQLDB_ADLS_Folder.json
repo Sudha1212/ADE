@@ -1,0 +1,7 @@
+{
+	"name": "Ingestion_Customer_SQLDB_ADLS_Folder",
+	"properties": {
+		"description": "Ingestion_Customer_SQLDB_ADLS_Folder",
+		"annotations": []
+	}
+}
