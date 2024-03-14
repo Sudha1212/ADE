@@ -48,7 +48,8 @@
 						"referenceName": "AzureSQLDB_Anytable",
 						"type": "DatasetReference",
 						"parameters": {
-							"Table_Name": "Product"
+							"Table_Name": "Product",
+							"Schema_Name": "SalesLT"
 						}
 					}
 				],
