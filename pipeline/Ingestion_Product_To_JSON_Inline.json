@@ -1,11 +1,11 @@
 {
-	"name": "Ingestion_Product_To_JSON",
+	"name": "Ingestion_Product_To_JSON_Inline",
 	"properties": {
-		"description": "Ingestion_Product_To_JSON",
+		"description": "Product_Count ",
 		"activities": [
 			{
-				"name": "Product Count",
-				"description": "Product Count",
+				"name": "Address Count",
+				"description": "Address Count",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -19,7 +19,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT Count(1) Product_Count FROM [SalesLT].[Product]",
+						"sqlReaderQuery": "SELECT Count(1) Addr_Count FROM [SalesLT].[Address]",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -35,7 +35,7 @@
 				"type": "IfCondition",
 				"dependsOn": [
 					{
-						"activity": "Product Count",
+						"activity": "Address Count",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -44,13 +44,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@greater(activity('Product Count').output.firstRow.Product_Count,10)",
+						"value": "@greater(activity('Address Count').output.firstRow.Addr_Count ,100)",
 						"type": "Expression"
 					},
 					"ifTrueActivities": [
 						{
-							"name": "Copy Product to ADLS JSON",
-							"description": "Copy Product to ADLS JSON",
+							"name": "Copy Address to ADLS CSV",
+							"description": "Copy Address to ADLS CSV",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -68,60 +68,59 @@
 									"partitionOption": "None"
 								},
 								"sink": {
-									"type": "JsonSink",
+									"type": "DelimitedTextSink",
 									"storeSettings": {
 										"type": "AzureBlobFSWriteSettings"
 									},
 									"formatSettings": {
-										"type": "JsonWriteSettings"
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
 									}
 								},
-								"enableStaging": false
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
 							},
 							"inputs": [
 								{
 									"referenceName": "AzureSQLDB_Anytable",
 									"type": "DatasetReference",
 									"parameters": {
-										"Table_Name": "Product",
+										"Table_Name": "Address",
 										"Schema_Name": "SalesLT"
 									}
 								}
 							],
 							"outputs": [
 								{
-									"referenceName": "ADLS_AnyJSON_Dataset",
-									"type": "DatasetReference"
+									"referenceName": "ADLS_AnyFolder_CSV",
+									"type": "DatasetReference",
+									"parameters": {
+										"Folder_Name": {
+											"value": "@pipeline().parameters.Address",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
 					]
 				}
-			},
-			{
-				"name": "Execute Pipeline1",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "Check Product Count ",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "Ingestion_Product_To_JSON_Inline",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
-				}
 			}
 		],
+		"parameters": {
+			"Address": {
+				"type": "string",
+				"defaultValue": "Address"
+			}
+		},
 		"annotations": []
 	}
 }
