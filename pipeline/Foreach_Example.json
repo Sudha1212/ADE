@@ -14,7 +14,7 @@
 						"value": "@createArray('Customer','Address')",
 						"type": "Expression"
 					},
-					"batchCount": 2,
+					"batchCount": 1,
 					"activities": [
 						{
 							"name": "Copying table data",
@@ -70,13 +70,10 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "ADLS_AnyFolder_CSV",
+									"referenceName": "CSV_AnyFilename",
 									"type": "DatasetReference",
 									"parameters": {
-										"Folder_Name": {
-											"value": "@item()",
-											"type": "Expression"
-										}
+										"File_Name": "BothFile"
 									}
 								}
 							]
