@@ -8,11 +8,14 @@
 		"ADLS_inked_Serive_accountKey": {
 			"value": ""
 		},
-		"Misson100_AzureSqlDB_connectionString": {
-			"value": ""
+		"AzureSqlDB_LS_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=mission100sudhakar12dec-sqlserver.database.windows.net;Initial Catalog=Mission100Sudhakar12Dec-DB;User ID=SQLServer"
 		},
 		"ADLS_inked_Serive_properties_typeProperties_url": {
 			"value": "https://sudhakar12dec89adls.dfs.core.windows.net/"
+		},
+		"AzureKeyVault_LS_properties_typeProperties_baseUrl": {
+			"value": "https://Mission100KeyVault1.vault.azure.net/"
 		}
 	}
 }

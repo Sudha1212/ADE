@@ -11,13 +11,18 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'ADLS_inked_Serive'"
 		},
-		"Misson100_AzureSqlDB_connectionString": {
+		"AzureSqlDB_LS_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'Misson100_AzureSqlDB'"
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDB_LS'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=mission100sudhakar12dec-sqlserver.database.windows.net;Initial Catalog=Mission100Sudhakar12Dec-DB;User ID=SQLServer"
 		},
 		"ADLS_inked_Serive_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://sudhakar12dec89adls.dfs.core.windows.net/"
+		},
+		"AzureKeyVault_LS_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://Mission100KeyVault1.vault.azure.net/"
 		},
 		"containerUri": {
 			"type": "string",
@@ -49,15 +54,38 @@
 					"ADLS_inked_Serive_accountKey": {
 						"value": "[parameters('ADLS_inked_Serive_accountKey')]"
 					},
-					"Misson100_AzureSqlDB_connectionString": {
-						"value": "[parameters('Misson100_AzureSqlDB_connectionString')]"
+					"AzureSqlDB_LS_connectionString": {
+						"value": "[parameters('AzureSqlDB_LS_connectionString')]"
 					},
 					"ADLS_inked_Serive_properties_typeProperties_url": {
 						"value": "[parameters('ADLS_inked_Serive_properties_typeProperties_url')]"
+					},
+					"AzureKeyVault_LS_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault_LS_properties_typeProperties_baseUrl')]"
 					}
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "Mission100Sudhakar12DecADF_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Mission100Sudhakar12DecADF_ArmTemplate_0')]"
+			]
 		}
 	]
 }
