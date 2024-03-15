@@ -1,0 +1,104 @@
+{
+	"name": "Ingestion_Product_To_JSON",
+	"properties": {
+		"description": "Ingestion_Product_To_JSON",
+		"activities": [
+			{
+				"name": "Product Count",
+				"description": "Product Count",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT Count(1) Product_Count FROM [SalesLT].[Product]",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "AzureSQLDB_Dataset",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Check Product Count",
+				"description": "Check Product Count ",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Product Count",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@greater(activity('Product Count').output.firstRow.Product_Count,10)",
+						"type": "Expression"
+					},
+					"ifTrueActivities": [
+						{
+							"name": "Copy Product to ADLS JSON",
+							"description": "Copy Product to ADLS JSON",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "AzureSQLDB_Anytable",
+									"type": "DatasetReference",
+									"parameters": {
+										"Table_Name": "Product",
+										"Schema_Name": "SalesLT"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ADLS_AnyJSON_Dataset",
+									"type": "DatasetReference"
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"annotations": []
+	}
+}

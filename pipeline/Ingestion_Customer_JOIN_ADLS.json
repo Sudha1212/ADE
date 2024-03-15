@@ -52,9 +52,13 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ADLS_AnyFolder_CSV",
+						"referenceName": "ADLS_CSV_DS",
 						"type": "DatasetReference",
 						"parameters": {
+							"Directory_Name": {
+								"value": "@pipeline().parameters.CustomerAddress",
+								"type": "Expression"
+							},
 							"Folder_Name": {
 								"value": "@pipeline().parameters.CustomerAddress",
 								"type": "Expression"
@@ -66,7 +70,8 @@
 		],
 		"parameters": {
 			"CustomerAddress": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "Customer_Address_Detail"
 			}
 		},
 		"annotations": []
