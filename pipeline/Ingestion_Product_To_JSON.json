@@ -94,32 +94,32 @@
 									"type": "DatasetReference"
 								}
 							]
+						},
+						{
+							"name": "Execute Pipeline1",
+							"description": "Execute Pipeline1",
+							"type": "ExecutePipeline",
+							"dependsOn": [
+								{
+									"activity": "Copy Product to ADLS JSON",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "Ingestion_Product_To_JSON_Inline",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true
+							}
 						}
 					]
-				}
-			},
-			{
-				"name": "Execute Pipeline1",
-				"description": "Execute Pipeline1",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "Check Product Count ",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "Ingestion_Product_To_JSON_Inline",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
 				}
 			}
 		],
