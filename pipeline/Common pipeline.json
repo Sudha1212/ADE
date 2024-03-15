@@ -1,0 +1,7 @@
+{
+	"name": "Common pipeline",
+	"properties": {
+		"description": "common pipeline For Customer, Product, CustomerAddress",
+		"annotations": []
+	}
+}
