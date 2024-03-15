@@ -48,7 +48,8 @@
 						"referenceName": "AzureSQLDB_Anytable",
 						"type": "DatasetReference",
 						"parameters": {
-							"Table_Name": "Customer"
+							"Table_Name": "Customer",
+							"Schema_Name": "SalesLT"
 						}
 					}
 				],

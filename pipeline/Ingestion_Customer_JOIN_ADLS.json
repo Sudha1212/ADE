@@ -1,11 +1,11 @@
 {
-	"name": "Copy_ProductTable_To_CSV",
+	"name": "Ingestion_Customer_JOIN_ADLS",
 	"properties": {
-		"description": "Copy_ProductTable_To_CSV",
+		"description": "Ingestion_Customer_JOIN_ADLS",
 		"activities": [
 			{
-				"name": "Copy Product ADLS CSV",
-				"description": "Copy_ProductTable_To_CSV",
+				"name": "Copy Customer And Customer Address Data",
+				"description": "Copy Customer And Customer Address Data Activity",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -19,6 +19,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT  Cust.*,Addr.AddressLine1,Addr.AddressLine2,Addr.City,Addr.StateProvince,Addr.CountryRegion,Addr.PostalCode\n FROM [SalesLT].[Customer] Cust Join [SalesLT].[CustomerAddress] CAddr on Cust.CustomerID=CAddr.CustomerID\njoin [SalesLT].[Address] Addr on Addr.AddressID=CAddr.AddressID",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -45,29 +46,34 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "AzureSQLDB_Anytable",
-						"type": "DatasetReference",
-						"parameters": {
-							"Table_Name": "Product",
-							"Schema_Name": "SalesLT"
-						}
+						"referenceName": "AzureSQLDB_Dataset",
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "CSV_Folderwise_Structure",
+						"referenceName": "ADLS_CSV_DS",
 						"type": "DatasetReference",
 						"parameters": {
-							"Folder_Name": {
-								"value": "@concat('Product/',formatDateTime(utcNow(),'yyyy'),'/',formatDateTime(utcNow(),'MM'),'/',formatDateTime(utcNow(),'dd'))",
+							"Directory_Name": {
+								"value": "@pipeline().parameters.CustomerAddress",
 								"type": "Expression"
 							},
-							"File_Name": "Product"
+							"Folder_Name": {
+								"value": "@pipeline().parameters.CustomerAddress",
+								"type": "Expression"
+							}
 						}
 					}
 				]
 			}
 		],
+		"parameters": {
+			"CustomerAddress": {
+				"type": "string",
+				"defaultValue": "Customer_Address_Detail"
+			}
+		},
 		"annotations": []
 	}
 }

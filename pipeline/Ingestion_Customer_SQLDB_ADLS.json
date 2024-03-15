@@ -1,11 +1,10 @@
 {
-	"name": "Copy_ProductTable_To_CSV",
+	"name": "Ingestion_Customer_SQLDB_ADLS",
 	"properties": {
-		"description": "Copy_ProductTable_To_CSV",
+		"description": "Ingestion_Customer_SQLDB_ADLS",
 		"activities": [
 			{
-				"name": "Copy Product ADLS CSV",
-				"description": "Copy_ProductTable_To_CSV",
+				"name": "Copy All Customer Data to ADLS-CSV",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -48,22 +47,15 @@
 						"referenceName": "AzureSQLDB_Anytable",
 						"type": "DatasetReference",
 						"parameters": {
-							"Table_Name": "Product",
+							"Table_Name": "Customer",
 							"Schema_Name": "SalesLT"
 						}
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "CSV_Folderwise_Structure",
-						"type": "DatasetReference",
-						"parameters": {
-							"Folder_Name": {
-								"value": "@concat('Product/',formatDateTime(utcNow(),'yyyy'),'/',formatDateTime(utcNow(),'MM'),'/',formatDateTime(utcNow(),'dd'))",
-								"type": "Expression"
-							},
-							"File_Name": "Product"
-						}
+						"referenceName": "ADLS_AnyCSV",
+						"type": "DatasetReference"
 					}
 				]
 			}

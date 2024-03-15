@@ -2,7 +2,7 @@
 	"name": "AzureSQLDB_Dataset",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Misson100_AzureSqlDB",
+			"referenceName": "AzureSqlDB_LS",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
