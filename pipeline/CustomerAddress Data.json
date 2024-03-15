@@ -1,11 +1,11 @@
 {
-	"name": "Copy_ProductTable_To_CSV",
+	"name": "CustomerAddress Data",
 	"properties": {
-		"description": "Copy_ProductTable_To_CSV",
+		"description": "CustomerAddress Data",
 		"activities": [
 			{
-				"name": "Copy Product ADLS CSV",
-				"description": "Copy_ProductTable_To_CSV",
+				"name": "Copy CustomerAddress ADLS CSV",
+				"description": "CustomerAddress Data",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -48,7 +48,7 @@
 						"referenceName": "AzureSQLDB_Anytable",
 						"type": "DatasetReference",
 						"parameters": {
-							"Table_Name": "Product",
+							"Table_Name": "CustomerAddress ",
 							"Schema_Name": "SalesLT"
 						}
 					}
