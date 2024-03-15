@@ -1,5 +1,5 @@
 {
-	"name": "CustomerAddress Data",
+	"name": "Copy_CustomerAddress_To_CSV",
 	"properties": {
 		"description": "CustomerAddress Data",
 		"activities": [
