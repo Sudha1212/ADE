@@ -59,11 +59,11 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"Folder_Name": {
-								"value": "@concat('CustomerAddress/',formatDateTime(utcNow(),'yyyy'),'/',formatDateTime(utcNow(),'MM'),'/',formatDateTime(utcNow(),'dd'))",
+								"value": "CustomerAddress/@{formatDateTime(utcNow(),'yyyy')}/@{formatDateTime(utcNow(),'MM')}/@{formatDateTime(utcNow(),'dd')}",
 								"type": "Expression"
 							},
 							"File_Name": {
-								"value": "@concat('CustomerAddress_',formatDateTime(utcNow(),'yyyy-MM-dd'))",
+								"value": "CustomerAddress",
 								"type": "Expression"
 							}
 						}

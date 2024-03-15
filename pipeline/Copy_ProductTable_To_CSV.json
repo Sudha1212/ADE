@@ -62,10 +62,7 @@
 								"value": "@concat('Product/',formatDateTime(utcNow(),'yyyy'),'/',formatDateTime(utcNow(),'MM'),'/',formatDateTime(utcNow(),'dd'))",
 								"type": "Expression"
 							},
-							"File_Name": {
-								"value": "@concat('Product_',formatDateTime(utcNow(),'yyyy-MM-dd'))",
-								"type": "Expression"
-							}
+							"File_Name": "Product"
 						}
 					}
 				]
