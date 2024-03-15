@@ -2,6 +2,73 @@
 	"name": "Ingestion_Customer_JOIN_ADLS",
 	"properties": {
 		"description": "Ingestion_Customer_JOIN_ADLS",
+		"activities": [
+			{
+				"name": "Copy Customer And Customer Address Data",
+				"description": "Copy Customer And Customer Address Data Activity",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT  Cust.*,Addr.AddressLine1,Addr.AddressLine2,Addr.City,Addr.StateProvince,Addr.CountryRegion,Addr.PostalCode\n FROM [SalesLT].[Customer] Cust Join [SalesLT].[CustomerAddress] CAddr on Cust.CustomerID=CAddr.CustomerID\njoin [SalesLT].[Address] Addr on Addr.AddressID=CAddr.AddressID",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "AzureSQLDB_Dataset",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ADLS_AnyFolder_CSV",
+						"type": "DatasetReference",
+						"parameters": {
+							"Folder_Name": {
+								"value": "@pipeline().parameters.CustomerAddress",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"CustomerAddress": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
