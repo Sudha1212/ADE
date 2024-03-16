@@ -18,12 +18,15 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "Metadata_ADLS_DS",
-						"type": "DatasetReference"
+						"referenceName": "ADLS_AnyFolder_CSV",
+						"type": "DatasetReference",
+						"parameters": {
+							"Folder_Name": "Customer/2024/03/15"
+						}
 					},
 					"fieldList": [
-						"itemName",
 						"itemType",
+						"itemName",
 						"childItems"
 					],
 					"storeSettings": {
@@ -31,7 +34,7 @@
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
-						"type": "JsonReadSettings"
+						"type": "DelimitedTextReadSettings"
 					}
 				}
 			},
@@ -62,12 +65,13 @@
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@equals(item().type,'File')",
+									"value": "@equals(item().name,'Customer')",
 									"type": "Expression"
 								},
 								"ifTrueActivities": [
 									{
-										"name": "Copy data1",
+										"name": "Copy Customer File",
+										"description": "Copy Customer File",
 										"type": "Copy",
 										"dependsOn": [],
 										"policy": {
@@ -113,11 +117,15 @@
 										},
 										"inputs": [
 											{
-												"referenceName": "CSV_AnyFilename",
+												"referenceName": "CSV_Folderwise_Structure",
 												"type": "DatasetReference",
 												"parameters": {
+													"Folder_Name": {
+														"value": "Customer/2024/03/15",
+														"type": "Expression"
+													},
 													"File_Name": {
-														"value": "@activity('Get Metadata Details From ADLS').output.itemName",
+														"value": "@item().name",
 														"type": "Expression"
 													}
 												}
@@ -125,11 +133,15 @@
 										],
 										"outputs": [
 											{
-												"referenceName": "CSV_AnyFilename",
+												"referenceName": "CSV_Folderwise_Structure",
 												"type": "DatasetReference",
 												"parameters": {
+													"Folder_Name": {
+														"value": "Customer/@{formatDateTime(utcNow(),'yyyy')}/@{formatDateTime(utcNow(),'MM')}/@{formatDateTime(utcNow(),'dd')}",
+														"type": "Expression"
+													},
 													"File_Name": {
-														"value": "@activity('Get Metadata Details From ADLS').output.itemName",
+														"value": "@item().name",
 														"type": "Expression"
 													}
 												}
