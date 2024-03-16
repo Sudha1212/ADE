@@ -4,8 +4,8 @@
 		"description": "Foreach_Example",
 		"activities": [
 			{
-				"name": "ForEachFor Customer and Address",
-				"description": "ForEachFor Customer and Address",
+				"name": "ForEachFor Customer and CustomerAddress",
+				"description": "ForEachFor Customer and CustomerAddress",
 				"type": "ForEach",
 				"dependsOn": [],
 				"userProperties": [],
