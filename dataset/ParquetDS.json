@@ -1,0 +1,19 @@
+{
+	"name": "ParquetDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLS_inked_Serive",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "landing"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
