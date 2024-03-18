@@ -1,22 +1,21 @@
 {
-	"name": "Foreach_Example",
+	"name": "Foreach_Example2",
 	"properties": {
-		"description": "Foreach_Example",
+		"description": "Foreach_Example2",
 		"activities": [
 			{
-				"name": "ForEachFor Customer and CustomerAddress",
-				"description": "ForEachFor Customer and CustomerAddress",
+				"name": "ForEach1",
 				"type": "ForEach",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@createArray('Customer','CustomerAddress')",
+						"value": "@createArray('SELECT TOP (1000) * FROM [SalesLT].[Customer]','SELECT TOP (1000) * FROM [SalesLT].[Product]')",
 						"type": "Expression"
 					},
 					"activities": [
 						{
-							"name": "Copy Customer and Customer Address",
+							"name": "Copy Customer and Product",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -30,6 +29,10 @@
 							"typeProperties": {
 								"source": {
 									"type": "AzureSqlSource",
+									"sqlReaderQuery": {
+										"value": "@item()",
+										"type": "Expression"
+									},
 									"queryTimeout": "02:00:00",
 									"partitionOption": "None"
 								},
@@ -56,27 +59,14 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "AzureSQLDB_Anytable",
-									"type": "DatasetReference",
-									"parameters": {
-										"Table_Name": {
-											"value": "@item()",
-											"type": "Expression"
-										},
-										"Schema_Name": "SalesLT"
-									}
+									"referenceName": "AzureSqlDyamnic_DS",
+									"type": "DatasetReference"
 								}
 							],
 							"outputs": [
 								{
-									"referenceName": "CSV_AnyFilename",
-									"type": "DatasetReference",
-									"parameters": {
-										"File_Name": {
-											"value": "@item()",
-											"type": "Expression"
-										}
-									}
+									"referenceName": "ADLS_AnyCSV",
+									"type": "DatasetReference"
 								}
 							]
 						}

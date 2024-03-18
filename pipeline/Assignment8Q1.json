@@ -1,0 +1,37 @@
+{
+	"name": "Assignment8Q1",
+	"properties": {
+		"description": "Customer_Even_Table_Pipepipe",
+		"activities": [
+			{
+				"name": "Clone Cusotmer Even Details",
+				"description": "Clone Cusotmer Even Details",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "Dataflow_Customer_CSV",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "None",
+					"cacheSinks": {
+						"firstRowOnly": true
+					}
+				}
+			}
+		],
+		"annotations": []
+	}
+}
