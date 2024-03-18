@@ -39,7 +39,10 @@
 				"inputs": [
 					{
 						"referenceName": "RestCountriesAPICall",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"Country": "India"
+						}
 					}
 				],
 				"outputs": [
