@@ -1,16 +1,10 @@
 {
 	"name": "RestLinkedService",
 	"properties": {
-		"parameters": {
-			"CountryName": {
-				"type": "string",
-				"defaultValue": "all"
-			}
-		},
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
-			"url": "https://restcountries.com/v3.1/@linkedService().CountryName",
+			"url": "https://restcountries.com/v3.1/name",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		}
