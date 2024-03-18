@@ -1,0 +1,69 @@
+{
+	"name": "Dataflow_Customer_CSV",
+	"properties": {
+		"description": "CustomerID even details",
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "RawCustomer_Data",
+						"type": "DatasetReference"
+					},
+					"name": "CustomerData",
+					"description": "Customer_Data"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DumpEvenCustomerDS",
+						"type": "DatasetReference"
+					},
+					"name": "SinkDatatoDB",
+					"description": "SinkDatatoDB"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterevenCustomerID",
+					"description": "filter even CustomerID"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          CustomerID as short,",
+				"          NameStyle as boolean,",
+				"          Title as string,",
+				"          FirstName as string,",
+				"          MiddleName as string,",
+				"          LastName as string,",
+				"          Suffix as string,",
+				"          CompanyName as string,",
+				"          SalesPerson as string,",
+				"          EmailAddress as string,",
+				"          Phone as string,",
+				"          PasswordHash as string,",
+				"          PasswordSalt as string,",
+				"          rowguid as string,",
+				"          ModifiedDate as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     inferDriftedColumnTypes: true,",
+				"     ignoreNoFilesFound: false) ~> CustomerData",
+				"CustomerData filter(CustomerID%2==0) ~> FilterevenCustomerID",
+				"FilterevenCustomerID sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkDatatoDB"
+			]
+		}
+	}
+}
