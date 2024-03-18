@@ -1,6 +1,12 @@
 {
 	"name": "RestLinkedService",
 	"properties": {
+		"parameters": {
+			"CountryName": {
+				"type": "string",
+				"defaultValue": "all"
+			}
+		},
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
