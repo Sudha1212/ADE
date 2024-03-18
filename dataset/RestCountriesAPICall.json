@@ -1,0 +1,20 @@
+{
+	"name": "RestCountriesAPICall",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "RestLinkedService",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"CountryName": "name/India"
+			}
+		},
+		"parameters": {
+			"Country": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
