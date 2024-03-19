@@ -17,6 +17,9 @@
 		"AzureKeyVault_LS_properties_typeProperties_baseUrl": {
 			"value": "https://Mission100KeyVault1.vault.azure.net/"
 		},
+		"RestLinkedService_properties_typeProperties_url": {
+			"value": "https://restcountries.com/v3.1/name"
+		},
 		"containerUri": {
 			"value": ""
 		},
