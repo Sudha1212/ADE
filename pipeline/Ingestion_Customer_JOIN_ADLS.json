@@ -55,14 +55,11 @@
 						"referenceName": "ADLS_CSV_DS",
 						"type": "DatasetReference",
 						"parameters": {
-							"Directory_Name": {
-								"value": "@pipeline().parameters.CustomerAddress",
-								"type": "Expression"
-							},
 							"Folder_Name": {
 								"value": "@pipeline().parameters.CustomerAddress",
 								"type": "Expression"
-							}
+							},
+							"File_Name": "Cust"
 						}
 					}
 				]
